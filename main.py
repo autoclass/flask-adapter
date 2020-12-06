@@ -12,7 +12,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route('/leave', methods=['POST'])
 @cross_origin()
 def leave():
-    f = open('./leave', 'w')
+    f = open('./leave.txt', 'w')
     f.write('1')
     f.close()
     return "", 200
@@ -20,13 +20,13 @@ def leave():
 
 @app.route('/unmute', methods=['POST'])
 @cross_origin()
-def mute():
-    f = open('./unmute', 'w')
+def unmute():
+    f = open('./mute.txt', 'w')
     f.write('0')
     f.close()
 
-    def unmute():
-        f = open('./unmute', 'w')
+    def mute():
+        f = open('./mute.txt', 'w')
         f.write('1')
         f.close()
 
@@ -40,7 +40,7 @@ def mute():
 def join():
     platform = request.form.get('platform')
     opts = request.form.get('opts')
-    f = open('./join', 'w')
+    f = open('./join.txt', 'w')
     f.write(f'{platform} {opts}')
     f.close()
     return "", 200
