@@ -9,7 +9,7 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/leave', methods=['POST'])
+@app.route('/leave', methods=['POST','GET'])
 @cross_origin()
 def leave():
     f = open('./leave.txt', 'w')
