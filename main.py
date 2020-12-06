@@ -2,7 +2,7 @@
 
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-import threading
+import time
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -25,13 +25,11 @@ def unmute():
     f.write('0')
     f.close()
 
-    def mute():
-        f = open('./mute.txt', 'w')
-        f.write('1')
-        f.close()
+    time.sleep(int(request.form.get('length')))
+    f = open('./mute.txt', 'w')
+    f.write('1')
+    f.close()
 
-    t = threading.Timer(int(request.form.get('length')), unmute)
-    t.start()
     return "", 200
 
 
