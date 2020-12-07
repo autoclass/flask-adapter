@@ -7,7 +7,7 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-__version = 0.2
+__version = 0.3
 
 
 @app.route('/leave', methods=['POST'])
@@ -39,7 +39,7 @@ def mute():
 def join():
     platform = request.form.get('platform')
     opts = request.form.get('opts')
-    with open('./mute.txt', 'w') as f:
+    with open('./join.txt', 'w') as f:
         f.write(f'{platform} {opts}')
     return "", 200
 
