@@ -2,34 +2,33 @@
 
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-import time
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/leave', methods=['POST','GET'])
+@app.route('/leave', methods=['POST'])
 @cross_origin()
 def leave():
-    f = open('./leave.txt', 'w')
-    f.write('1')
-    f.close()
+    with open('./leave.txt', 'w') as f:
+        f.write('1')
     return "", 200
 
 
 @app.route('/unmute', methods=['POST'])
 @cross_origin()
 def unmute():
-    f = open('./mute.txt', 'w')
-    f.write('0')
-    f.close()
+    with open('./mute.txt', 'w') as f:
+        f.write('0')
+    return "", 200
 
-    time.sleep(int(request.form.get('length')))
-    f = open('./mute.txt', 'w')
-    f.write('1')
-    f.close()
 
+@app.route('/mute', methods=['POST'])
+@cross_origin()
+def mute():
+    with open('./mute.txt', 'w') as f:
+        f.write('1')
     return "", 200
 
 
@@ -38,9 +37,8 @@ def unmute():
 def join():
     platform = request.form.get('platform')
     opts = request.form.get('opts')
-    f = open('./join.txt', 'w')
-    f.write(f'{platform} {opts}')
-    f.close()
+    with open('./mute.txt', 'w') as f:
+        f.write(f'{platform} {opts}')
     return "", 200
 
 
