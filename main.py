@@ -7,6 +7,8 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+version = 0.2
+
 
 @app.route('/leave', methods=['POST'])
 @cross_origin()
@@ -40,6 +42,12 @@ def join():
     with open('./mute.txt', 'w') as f:
         f.write(f'{platform} {opts}')
     return "", 200
+
+
+@app.route('/version', methods=['GET'])
+@cross_origin()
+def version():
+    return str(version), 200
 
 
 if __name__ == '__main__':
