@@ -2,12 +2,13 @@
 
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
+import pkg_resources  # part of setuptools
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-__version = 0.3
+__version = pkg_resources.require("flask-adapter")[0].version
 
 
 @app.route('/leave', methods=['POST'])
@@ -41,6 +42,14 @@ def join():
     opts = request.form.get('opts')
     with open('./join.txt', 'w') as f:
         f.write(f'{platform} {opts}')
+    return "", 200
+
+
+@app.route('/reset', methods=['POST'])
+@cross_origin()
+def reset():
+    with open('./reset.txt', 'w') as f:
+        f.write('1')
     return "", 200
 
 
