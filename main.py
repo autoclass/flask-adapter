@@ -2,13 +2,12 @@
 
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-import pkg_resources  # part of setuptools
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-__version = pkg_resources.require("flask-adapter")[0].version
+__version = 0.4
 
 
 @app.route('/leave', methods=['POST'])
